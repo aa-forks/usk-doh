@@ -13,10 +13,9 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential
   
-      - name: Checkout DefenderOfHyrule/usk
+      - name: Checkoutusk
         uses: actions/checkout@v3
         with:
-          repository: DefenderOfHyrule/usk
           path: usk
       
       - name: Checkout DefenderOfHyrule/busk
@@ -51,7 +50,6 @@ jobs:
           cd $GITHUB_WORKSPACE/build/busk
           cmake $GITHUB_WORKSPACE/busk
           make
-          make clean
           cd $GITHUB_WORKSPACE
           # Restore original memmap_default.ld from backup
           rm -f $GITHUB_WORKSPACE/pico-sdk/src/rp2_common/pico_crt0/rp2040/memmap_default.ld
@@ -63,7 +61,6 @@ jobs:
           cd $GITHUB_WORKSPACE/build/usk
           cmake $GITHUB_WORKSPACE/usk
           make
-          make clean
           python3 $GITHUB_WORKSPACE/usk/prepare.py
           cd $GITHUB_WORKSPACE
       - name: Generate release tag
